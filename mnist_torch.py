@@ -9,7 +9,7 @@ import requests
 import matplotlib.pyplot as plt
 import numpy as np
 from torch import tensor, optim
-from tqdm import tqdm
+from tqdm import trange
 from torchvision import transforms
 
 
@@ -73,7 +73,7 @@ batch_size = 128
 loss_func = torch.nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters())
 losses, accs = [], []
-for i in (t := tqdm(range(epochs))):
+for i in (t := trange(epochs)):
     idx = np.random.randint(0, x_train.shape[0], size=(batch_size))
     x = tensor(x_train[idx]).float()
     y = tensor(y_train[idx]).long()
